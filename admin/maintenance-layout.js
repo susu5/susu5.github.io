@@ -58,11 +58,11 @@ function runBackupWorker(action,payload){
 }
 async function exportMaintenanceBackup(){
  await maintenanceWork(async()=>{
-  maintenanceProgress('正在读取完整内容与图片清单…');const {manifest}=await api.request('/api/maintenance/backup');SUSU_BACKUP.validateManifest(manifest);const files=[];let total=0;
+  maintenanceProgress('正在读取完整内容与图片清单…');const {manifest}=await api.request('/api/maintenance/backup',{timeoutMs:45000,timeoutMessage:'读取备份清单超时，请检查网络后重新点击「下载完整备份 ZIP」。'});SUSU_BACKUP.validateManifest(manifest);const files=[];let total=0;
   for(const [index,item] of manifest.media.entries()){
    if(typeof item.downloadPath!=='string'||!item.downloadPath.startsWith('/api/maintenance/media?'))throw new Error('服务器返回了无效的备份图片地址。');
    maintenanceProgress(`正在备份图片 ${index+1} / ${manifest.media.length}…`);
-   const bytes=await api.request(item.downloadPath,{responseType:'bytes',maxBytes:SUSU_BACKUP.LIMITS.media});total+=bytes.length;if(total>SUSU_BACKUP.LIMITS.total)throw new Error('备份超过浏览器处理上限，需要由维护人员分别导出数据库和图片。');files.push({path:item.path,bytes});
+   const bytes=await api.request(item.downloadPath,{responseType:'bytes',maxBytes:SUSU_BACKUP.LIMITS.media,timeoutMs:90000,timeoutMessage:`第 ${index+1} / ${manifest.media.length} 张备份图片下载超时，请检查网络后重新点击「下载完整备份 ZIP」。`});total+=bytes.length;if(total>SUSU_BACKUP.LIMITS.total)throw new Error('备份超过浏览器处理上限，需要由维护人员分别导出数据库和图片。');files.push({path:item.path,bytes});
   }
   maintenanceProgress('正在校验图片并生成 ZIP…');const result=await runBackupWorker('pack',{manifest,files});
   const blob=new Blob([result.bytes],{type:'application/zip'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='susu5-backup-'+manifest.createdAt.replace(/[:.]/g,'-')+'.zip';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
