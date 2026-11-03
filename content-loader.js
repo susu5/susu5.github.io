@@ -13,7 +13,7 @@
       {icon:'email',label:'联系邮箱',name:profile.email || '',href:profile.email ? 'mailto:' + profile.email : ''},
       {icon:'github',label:'GitHub',name:profile.github || '',href:profile.github ? 'https://github.com/' + encodeURIComponent(profile.github) : ''}
     ];
-    const script = document.createElement('script'); script.src = 'site.js';
+    const script = document.createElement('script'); script.src = 'site.js?v=20261103-relations';
     script.onerror = showError; document.body.appendChild(script);
   } catch { showError(); }
   function showError() {

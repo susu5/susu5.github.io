@@ -12,3 +12,9 @@
 .cover-essay{background:#dfe4d5;color:#2d4535;padding-top:24%}
 @media(max-width:600px){.hero-caption>span:last-child{display:flex;align-items:center;text-align:left;gap:8px}.hero-caption .arrow{flex-shrink:0;margin-left:0}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+
+/* Published knowledge entries selected for this project. */
+.related>h2{font-size:14px;font-weight:400;color:var(--muted);margin:0 0 16px}
+.related-list{list-style:none;padding:0;margin:0;display:grid;gap:16px}
+.related-list .text-link{max-width:100%;line-height:1.6;overflow-wrap:anywhere}
+.related-list .arrow{flex-shrink:0}

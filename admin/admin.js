@@ -153,7 +153,7 @@ main.onchange=async e=>{
   const input=e.target;try{message('正在上传头像…');const file=await uploadFile(input.files[0]);if(!input.isConnected)return;profileData.avatarFile=file;profileData.avatar=file.path;main.querySelector('.profile-avatar').src=file.url;markDirty();message('头像已上传，请保存或发布个人资料。')}catch(error){message(error.message)}
  }
 };
-main.addEventListener('input',e=>{if(e.target.id!=='library-search'&&e.target.closest('form'))markDirty()});
+main.addEventListener('input',e=>{if(!['library-search','project-related-search'].includes(e.target.id)&&e.target.closest('form'))markDirty()});
 modal.addEventListener('close',async()=>{if(modal.returnValue!=='publish'||!pendingSelection)return;const selection=pendingSelection;pendingSelection=null;await withMutation(()=>publishSelection(selection))});
 const deleteDialog=document.querySelector('#delete-dialog');
 deleteDialog.addEventListener('close',async()=>{
