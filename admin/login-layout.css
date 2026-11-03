@@ -1,0 +1,29 @@
+.login-screen{min-height:100svh;background:#fff;padding:0 5.5vw;display:flex;flex-direction:column}
+.login-top{min-height:104px;padding:24px 0;background:none;border-bottom:1px solid var(--line)}
+.login-wordmark{font:400 36px/1 Georgia,serif;color:var(--jade);letter-spacing:-.035em}
+.login-top a{display:flex;align-items:center;gap:9px;min-height:44px;font-size:13px}
+.login-arrow{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5}
+.login-body{flex:1;display:grid;grid-template-columns:minmax(0,1.14fr) minmax(0,1fr);align-items:center;gap:8vw;max-width:1260px;width:100%;margin:0 auto;padding:64px 0 68px}
+.login-story{align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:34px}
+.login-story h2{font:900 60px/1.4 Title,SimSun,serif;color:var(--jade);letter-spacing:-.025em}
+.login-story h2 span{display:block}.login-story figure{margin:0}
+.login-landscape{display:block;width:100%;height:auto;aspect-ratio:2/1;object-fit:cover}
+.login-story figcaption{display:flex;justify-content:space-between;gap:16px;margin-top:13px;color:var(--muted);font-size:12px}
+.login-card{max-width:392px;width:100%;justify-self:center;padding:16px 0}
+.login-portrait{display:block;width:58px;height:58px;object-fit:contain;margin-bottom:25px}
+.login-card h1{font-size:36px;line-height:1.4;margin-bottom:13px}
+.login-lede{font-size:15px;line-height:1.9;color:var(--muted);max-width:30ch}
+.login-account{margin:34px 0 20px;padding:15px 0;border-block:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px}
+.login-account span{color:var(--muted)}.login-account strong{font-size:15px;font-weight:600}
+.login-provider{width:100%;display:flex;justify-content:center;align-items:center;gap:12px;border:1px solid var(--jade);background:var(--jade);color:#fff;min-height:52px;font-size:15px;font-weight:600;transition:background .16s ease}
+.login-provider:hover{background:#00563f}.login-provider:disabled{background:#326f5d;cursor:wait}.login-provider svg{width:22px;height:22px;fill:currentColor}
+.login-note{font-size:12px;color:var(--muted);line-height:1.8;margin-top:12px}
+.login-feedback{margin-top:15px;padding:14px;background:var(--wash);line-height:1.8;font-size:13px}.login-feedback strong{display:block;color:var(--jade);margin-bottom:3px}
+
+
+.login-bottom{border-top:1px solid var(--line);padding:21px 0 24px;display:flex;align-items:center;justify-content:space-between;gap:14px;font-size:12px;color:var(--muted)}
+.mobile-logout{display:none}
+#main:focus{outline:none}
+@media(max-width:1000px){.login-body{gap:6vw}.login-story h2{font-size:46px}.login-card h1{font-size:32px}}
+@media(max-width:720px){.login-screen{padding:0 24px}.login-top{min-height:80px;padding:15px 0}.login-wordmark{font-size:30px}.login-body{display:block;padding:38px 0 44px}.login-story{display:none}.login-card{padding:0;margin:auto;max-width:400px}.login-portrait{width:50px;height:50px;margin-bottom:20px}.login-card h1{font-size:32px}.login-account{margin-top:27px}.login-bottom{flex-wrap:wrap;font-size:11px}.mobile-logout{display:inline-flex;align-items:center;min-height:40px;border:0;background:none;color:var(--jade);padding:0 8px}.admin-header-actions{display:flex;align-items:center;gap:10px}}
+@media(prefers-reduced-motion:reduce){.login-provider{transition:none}}

@@ -1,0 +1,21 @@
+.home-layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:22px;align-items:start}
+.home-section{padding:24px}.home-section+.home-section{border-top:1px solid var(--line)}
+.home-section h2{font-size:18px;margin-bottom:6px}.home-section>p{margin-bottom:16px}
+.home-modes{display:flex;flex-wrap:wrap;gap:12px 24px;margin:18px 0 12px}
+.home-modes label{display:flex;align-items:center;gap:8px;margin:0;min-height:32px;font-weight:500}
+.home-modes input{width:16px;height:16px;accent-color:var(--jade);margin:0}
+.home-section .home-rule{font-size:13px;line-height:1.8;margin-bottom:20px;max-width:60ch}
+.home-quota{display:flex;flex-wrap:wrap;gap:12px 20px;margin:16px 0;padding:12px 0;border-block:1px solid var(--line)}
+.home-quota strong{font-size:20px;color:var(--jade);margin-right:4px;font-variant-numeric:tabular-nums}
+.home-side{display:grid;gap:16px}.home-side h2{font-size:16px}.home-current h3{font-size:13px;margin-bottom:10px}
+.home-image{border:0;display:block;width:100%;padding:0;background:var(--wash)}.home-image:hover{outline:1px solid var(--jade);outline-offset:3px}
+.home-image img{aspect-ratio:16/10;object-fit:contain}.home-caption{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:12px 0 3px}.home-caption span{font-size:12px;white-space:nowrap}
+.home-current .pad>p{font-size:12px}.home-empty{padding:24px 12px;background:var(--wash);line-height:1.8;color:var(--muted)}
+.home-picks{padding:0;list-style:none;margin:0}.home-picks li+li{border-top:1px solid var(--line)}
+.home-picks button{width:100%;display:grid;grid-template-columns:45px minmax(0,1fr);gap:10px;padding:13px 0;border:0;background:none;text-align:left}.home-picks button:hover strong{color:var(--jade);text-decoration:underline;text-underline-offset:3px}
+.home-picks strong{font-size:13px;font-weight:500;overflow-wrap:anywhere}.home-picks span{font-size:12px}
+.front-preview .home-detail-image{aspect-ratio:auto;height:auto;max-height:65vh;object-fit:contain;margin:20px 0}
+input,textarea{caret-color:var(--jade)}::selection{background:#d2efdf;color:#124e37}
+@media(max-width:1120px){.home-layout{grid-template-columns:minmax(0,1fr) 300px;gap:16px}.home-section{padding:18px}}
+@media(max-width:950px){.home-layout{grid-template-columns:minmax(0,1fr)}.home-side{grid-template-columns:minmax(0,1fr)}.home-image img{max-height:300px}}
+@media(max-width:420px){.home-section{padding:16px}.home-layout .foot{align-items:start;flex-direction:column}.home-layout .foot .btn{align-self:end}.home-current .home-caption{display:block}.home-current .home-caption span{display:block;margin-top:4px}.home-picks button{min-height:44px}}

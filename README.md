@@ -1,23 +1,28 @@
 # Susu 个人创作网站
 
-解压后双击 `index.html` 即可浏览。网站使用原生 HTML、CSS 和 JavaScript，图片和字体随目录提供。也可将整个目录放到静态网站主机。
+网站：https://susu5.cn/
+后台：https://susu5.cn/admin/
 
-| 页面 | 地址 |
-|---|---|
-| 首页 | `index.html#home` |
-| 项目列表 | `index.html#projects` |
-| 项目详情 | `index.html#project/2` |
-| 图片库 | `index.html#gallery` |
-| 知识库 | `index.html#knowledge` |
-| 笔记详情 | `index.html#note/1` |
+本站使用 GitHub Pages 托管。页面从 content.json 读取已发布的项目、知识库、图片、个人资料和首页推荐。后台保留纯白、玉绿和粗宋风格，并支持手机端。
 
-首页支持 100 格项目墙和封面视图，项目列表可按名称和简介搜索，图片库可按类别筛选。手机端精选卡可横向滑动，图片库为单列。
+## 内容管理
 
-## 更新内容
+后台使用 GitHub 登录，仅允许站点管理员 susu5。服务端会同时核对账号 ID 和网站仓库 ID。GitHub 应用需要安装到 susu5.github.io 仓库，授予 Contents 读写和 Metadata 读取权限。
 
-- 项目、笔记、画作标题及分类在 `data.js`。示例图片在 `assets/`，画作文件对应关系在 `site.js` 的 `artAssets`。
-- 页头和页尾在 `index.html`。在 `data.js` 的 `SITE_CONTACTS` 中填写联系方式的显示名和链接，邮箱链接使用 `mailto:`。
-- 纯白、玉绿、粗宋及手机端覆盖样式集中在 `jade.css`。标题使用自带的思源宋体粗体，正文优先使用设备宋体并回退到随附的思源宋体。
-- 当前项目、画作和笔记均为示例内容。公众号、社交账号和邮箱等真实信息可在上线前换入。
+保存草稿只写入后台私有数据库。点击发布后，服务端将选定内容和它引用的图片提交到本仓库，GitHub Pages 自动构建；后台确认线上内容版本已更新后显示成功。发布失败可以重试，其他草稿不会随之发布。删除已经发布的内容会同时从线上列表移除。
 
-思源宋体与 Geist Mono 的字体许可随文件位于 `assets/`。
+GitHub 密钥、登录会话、草稿和未发布图片由独立服务保管，不存储在这个公开仓库。后台登录服务尚未配置或不可用时，不会提供模拟登录入口。
+
+## 开发
+
+本目录是原生 HTML、CSS、JavaScript 网站，无须构建。请使用本地 HTTP 服务预览，不要直接双击 HTML，因为页面需要读取 JSON。
+
+- site.js：公开网站页面与交互。
+- content-loader.js：加载已发布内容。
+- content-covers.js：项目与知识库封面规则。
+- admin/：管理界面与服务端 API 适配。
+- jade.css：纯白、玉绿、粗宋与移动端样式。
+
+不要直接修改 content.json 来管理内容，下一次后台发布会按后台保存的内容更新它。修改网站结构和样式时可以正常提交代码，后台发布会保留这些文件。
+
+字体与 Markdown 解析器的许可证随对应资源提供。
