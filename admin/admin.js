@@ -1,6 +1,6 @@
 'use strict';
 const assets='../assets/';
-const labels={home:'首页装扮',projects:'项目',articles:'知识库',images:'图片',profile:'个人资料'};
+const labels={home:'首页装扮',projects:'项目',articles:'知识库',images:'图片',profile:'个人资料',maintenance:'备份与恢复'};
 const records={projects:[],articles:[]},photos=[],profileData={},homeData={heroMode:'auto',featuredMode:'auto',hero:'',caption:'',featured:['','','','','']};
 let tab='home',selected=0,timer,phase='已连接',deleteTarget=null,pendingSelection=null;
 let serverState=null,lastServerState=null,busy=false,uploadsInFlight=0,dirty=false,publishPoll;
@@ -55,9 +55,10 @@ function discardUnsaved(){
 }
 function render(){
  nav.innerHTML=Object.entries(labels).map(([key,label])=>`<button data-tab="${key}" ${tab===key?'aria-current="page"':''}>${label}</button>`).join('');
- const sub={projects:'管理项目、封面、进度和访问地址。',articles:'编辑知识库条目与封面。',images:'上传图片，编辑分类与介绍。',profile:'设置首页介绍、头像和联系方式。',home:'设置首页首图和「最近，正在着迷」的推荐内容。'};
+ const sub={projects:'管理项目、封面、进度和访问地址。',articles:'编辑知识库条目与封面。',images:'上传图片，编辑分类与介绍。',profile:'设置首页介绍、头像和联系方式。',home:'设置首页首图和「最近，正在着迷」的推荐内容。',maintenance:'保留自己的完整副本，找回误删或需要回退的内容。'};
  const extra=isLibrary()?libraryActions():tab==='projects'?(projectOpen?'<button class="btn" data-project="back">返回项目列表</button>':'<button class="btn primary" data-project="new">新建项目</button>'):'';
- main.innerHTML=`<div class="heading"><div><h1>${tab==='projects'&&projectOpen?'编辑项目':labels[tab]}</h1><p class="muted">${sub[tab]}</p></div><div>${extra}</div></div>`+(isLibrary()?libraryContent():tab==='projects'?(projectOpen?projectEditor():projectList()):tab==='home'?homeEditor():profile())+pendingDeletionPanel();
+ main.innerHTML=`<div class="heading"><div><h1>${tab==='projects'&&projectOpen?'编辑项目':labels[tab]}</h1><p class="muted">${sub[tab]}</p></div><div>${extra}</div></div>`+(isLibrary()?libraryContent():tab==='projects'?(projectOpen?projectEditor():projectList()):tab==='home'?homeEditor():tab==='maintenance'?maintenancePage():profile())+pendingDeletionPanel();
+ if(tab==='maintenance')maintenanceMount();
 }
 function pendingDeletionPanel(){
  if(!['projects','articles','images'].includes(tab)||projectOpen||libraryView!=='list')return '';
@@ -126,6 +127,7 @@ nav.onclick=e=>{const b=e.target.closest('[data-tab]');if(!b||busy||uploadsInFli
 main.onclick=async e=>{
  const b=e.target.closest('button');if(!b||busy)return;
  try{
+  if(tab==='maintenance'&&await maintenanceAction(b))return;
   if(b.dataset.pendingDelete!==undefined){deleteTarget={kind:tab,id:b.dataset.pendingDelete,name:publishedItem(tab,b.dataset.pendingDelete)?.title||publishedItem(tab,b.dataset.pendingDelete)?.name};document.querySelector('#delete-name').textContent=deleteTarget.name;document.querySelector('#delete-dialog').showModal();return}
   if(b.dataset.restore!==undefined){await withMutation(async()=>{const item=publishedItem(tab,b.dataset.restore),draft=snapshotDraft();if(!item)return;draft[tab].push(clone(item));applyState(await api.request('/api/state',{method:'PUT',body:{draft,baseRevision:serverState.revision}}));render();message('内容已恢复到草稿列表。')});return}
   if(tab==='projects'&&projectAction(b))return;

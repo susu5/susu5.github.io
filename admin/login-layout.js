@@ -56,7 +56,7 @@ async function logout(){
  if(busy||uploadsInFlight){message('正在保存或上传，请完成后再退出。');return}
  if(!discardUnsaved())return;clearTimeout(publishPoll);
  try{if(api.hasToken())await api.request('/api/logout',{method:'POST',body:{}})}catch{}
- api.setToken('');serverState=null;lastServerState=null;records.projects.length=0;records.articles.length=0;photos.length=0;main.replaceChildren();dirty=false;showLogin();
+ api.setToken('');serverState=null;lastServerState=null;records.projects.length=0;records.articles.length=0;photos.length=0;clearMaintenance();main.replaceChildren();dirty=false;showLogin();
 }
  document.getElementById('logout').onclick=logout;
  document.getElementById('mobile-logout').onclick=logout;
