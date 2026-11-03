@@ -181,16 +181,6 @@
       "body": ""
     },
     {
-      "id": "2",
-      "url": "assets/mist-lake.webp",
-      "name": "雾中的湖",
-      "alt": "雾中的湖",
-      "width": 1536,
-      "height": 1024,
-      "group": "山海",
-      "body": ""
-    },
-    {
       "id": "3",
       "url": "assets/fern.webp",
       "name": "蕨的独白",
@@ -254,5 +244,5 @@
     "植物",
     "建筑"
   ],
-  "_cmsRevision": 3
+  "_cmsRevision": 6
 }
