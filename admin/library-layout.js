@@ -44,7 +44,7 @@ async function loadArticleCover(file){
 function showArticleFront(item){
  const box=document.querySelector('#front-content');
  box.innerHTML=`<article class="article-front"><h1>${safe(item.title)}</h1><p class="muted">${safe(item.summary||'知识库')}</p><div class="article-front-cover">${articleCoverMarkup(item)}</div><div class="markdown"></div></article>`;
- markdownInto(box.querySelector('.markdown'),item.body||'暂无正文。');
+ markdownInto(box.querySelector('.markdown'),item.body||'暂无正文。',item.bodyFiles);
  document.querySelector('#front').showModal();
 }
 main.addEventListener('change',event=>{if(event.target.id==='article-cover-file')loadArticleCover(event.target.files[0])});
@@ -66,11 +66,11 @@ function libraryList(){
 }
 function articleEdit(){
  const item=records.articles[selected]||{title:'',summary:'',state:'草稿',body:''};
- return `<div class="project-editor"><section class="panel"><div class="panel-head"><h2>${selected<0?'新建':'编辑'}知识库条目</h2><span class="status">${safe(item.state)}</span></div><form id="library-article"><div class="pad"><label>标题<input name="title" required maxlength="120" value="${safe(item.title)}"></label>${field('summary','栏目',item.summary)}${articleCoverEditor(item)}<section class="form-section"><div class="section-bar"><h3>正文 · Markdown</h3><button type="button" class="btn" data-library="markdown">预览正文</button></div><textarea class="md-input" name="body" aria-label="Markdown 正文">${safe(item.body)}</textarea><div class="md-result markdown" hidden></div></section></div>${formFoot(selected>=0)}</form></section><section class="panel"><div class="panel-head"><h2>发布管理</h2></div><div class="pad stack"><p class="muted">首页推荐使用上传的封面；未上传时，自动用文章标题生成封面。</p><button class="btn full" data-library="article-front">查看前台详情预览</button><button class="btn primary full" data-action="publish">发布到网站</button><p class="path">保存草稿不会修改线上内容；发布后网站自动更新。</p></div></section></div>`;
+ return `<div class="project-editor"><section class="panel"><div class="panel-head"><h2>${selected<0?'新建':'编辑'}知识库条目</h2><span class="status">${safe(item.state)}</span></div><form id="library-article"><div class="pad"><label>标题<input name="title" required maxlength="120" value="${safe(item.title)}"></label>${field('summary','栏目',item.summary)}${articleCoverEditor(item)}${bodyEditorMarkup(item)}</div>${formFoot(selected>=0)}</form></section><section class="panel"><div class="panel-head"><h2>发布管理</h2></div><div class="pad stack"><p class="muted">首页推荐使用上传的封面；未上传时，自动用文章标题生成封面。</p><button class="btn full" data-library="article-front">查看前台详情预览</button><button class="btn primary full" data-action="publish">发布到网站</button><p class="path">保存草稿不会修改线上内容；发布后网站自动更新。</p></div></section></div>`;
 }
 function imageEdit(){
  const item=photos[selected]||{name:'',group:'',alt:'',body:'',url:'',state:'草稿'};
- return `<div class="project-editor"><section class="panel"><div class="panel-head"><h2>${selected<0?'上传':'编辑'}图片</h2><span class="status ${item.state==='草稿'?'draft':''}">${safe(item.state||'已发布')}</span></div><form id="library-image"><div class="pad"><div id="library-image-preview">${coverImage(item.url?item:null)}</div><label>${selected<0?'选择图片':'替换图片'}<input id="library-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/avif" ${selected<0?'required':''}></label><p class="muted" id="library-file-status" role="status">${item.width&&item.height?`${item.width} × ${item.height} 像素 · ${item.width>item.height?'横图':item.width===item.height?'方图':'竖图'}`:''}</p><label>图片名称<input name="name" required value="${safe(item.name)}"></label><label>图片分类<select name="group">${option('','未分类',item.group)}${imageCategories.map(v=>option(v,v,item.group)).join('')}</select></label><section class="form-section"><div class="section-bar"><h3>正文 · Markdown</h3><button type="button" class="btn" data-library="markdown">预览正文</button></div><p class="muted">访客点开图片后，会在大图下方看到这段介绍。可以写创作想法、拍摄故事或使用说明。</p><textarea class="md-input" name="body" aria-label="图片正文 · Markdown" placeholder="写下这张图片的故事……">${safe(item.body)}</textarea><div class="md-result markdown" hidden></div></section><section class="form-section"><label>替代文字<input name="alt" value="${safe(item.alt)}" placeholder="例如：薄雾中的湖面与松树"><small class="muted">用一句话描述画面，供屏幕阅读器朗读或图片加载失败时使用。它与上方的图片正文不同；纯装饰图可以留空。</small></label></section></div>${formFoot(selected>=0)}</form></section><section class="panel"><div class="panel-head"><h2>发布管理</h2></div><div class="pad stack"><p class="muted">发布后，访客可以点开图片查看完整大图与正文介绍。</p><button class="btn full" data-library="front">查看前台详情预览</button><button class="btn primary full" data-action="publish">发布到网站</button><p class="path">保存草稿不会修改线上内容；发布后网站自动更新。</p></div></section></div>`;
+ return `<div class="project-editor"><section class="panel"><div class="panel-head"><h2>${selected<0?'上传':'编辑'}图片</h2><span class="status ${item.state==='草稿'?'draft':''}">${safe(item.state||'已发布')}</span></div><form id="library-image"><div class="pad"><div id="library-image-preview">${coverImage(item.url?item:null)}</div><label>${selected<0?'选择图片':'替换图片'}<input id="library-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/avif" ${selected<0?'required':''}></label><p class="muted" id="library-file-status" role="status">${item.width&&item.height?`${item.width} × ${item.height} 像素 · ${item.width>item.height?'横图':item.width===item.height?'方图':'竖图'}`:''}</p><label>图片名称<input name="name" required value="${safe(item.name)}"></label><label>图片分类<select name="group">${option('','未分类',item.group)}${imageCategories.map(v=>option(v,v,item.group)).join('')}</select></label>${bodyEditorMarkup(item,'这段介绍会显示在图片详情的大图下方。')}<section class="form-section"><label>替代文字<input name="alt" value="${safe(item.alt)}" placeholder="例如：薄雾中的湖面与松树"><small class="muted">用一句话描述画面，供屏幕阅读器朗读或图片加载失败时使用。它与上方的图片正文不同；纯装饰图可以留空。</small></label></section></div>${formFoot(selected>=0)}</form></section><section class="panel"><div class="panel-head"><h2>发布管理</h2></div><div class="pad stack"><p class="muted">发布后，访客可以点开图片查看完整大图与正文介绍。</p><button class="btn full" data-library="front">查看前台详情预览</button><button class="btn primary full" data-action="publish">发布到网站</button><p class="path">保存草稿不会修改线上内容；发布后网站自动更新。</p></div></section></div>`;
 }
 function categoryEditor(){
  return `<section class="panel"><div class="panel-head"><h2>图片分类</h2><button class="btn primary" data-action="publish">发布分类设置</button></div><div class="pad"><p class="muted">先保存分类，再发布到网站。发布分类只更新分类名称，不会发布图片的其他草稿修改。</p><form class="category-form" id="add-category"><label>新分类名称<input name="name" required maxlength="24"></label><button class="btn primary">添加分类</button></form>${imageCategories.map((name,i)=>`<form class="category-form" data-category-index="${i}"><label>分类名称<input name="name" required maxlength="24" value="${safe(name)}"></label><span class="muted">${photos.filter(p=>p.group===name).length} 张图片</span><button class="btn">保存名称</button><button class="btn danger" type="button" data-library="delete-category:${i}">删除分类</button></form>`).join('')}</div></section>`;
@@ -89,12 +89,6 @@ function libraryAction(b){
  if(action==='front'){
   const data=readLibrary(main.querySelector('#library-image'));
   if(data)showImageFront({...photos[selected],...data});
-  return true;
- }
- if(action==='markdown'){
-  const input=main.querySelector('.md-input'),out=main.querySelector('.md-result');
-  if(out.hidden)markdownInto(out,input.value);
-  out.hidden=!out.hidden;input.hidden=!out.hidden;b.textContent=out.hidden?'预览正文':'继续编辑';
   return true;
  }
  if(action==='delete-category'){
@@ -118,7 +112,7 @@ function readLibrary(form){
  if(articleCoverLoading&&form.getAttribute('id')==='library-article'){message('封面正在读取，请稍候再保存或预览');return null}
  if(articleCoverError&&form.getAttribute('id')==='library-article'){message('封面读取失败，请重新选择或移除封面');return null}
  if(!form.reportValidity())return null;
- const data=Object.fromEntries(new FormData(form)),id=form.getAttribute('id');
+ const data={...Object.fromEntries(new FormData(form)),...form.querySelector?.('[data-body-editor]')?.readBody()},id=form.getAttribute('id');
  if(id==='library-article'){
   data.title=data.title.trim();
   if(!data.title){message('请输入标题');return null}
@@ -142,7 +136,7 @@ function showImageFront(item){
  const box=document.querySelector('#front-content');
  box.innerHTML=`<article class="image-front"><h1>${safe(item.name)}</h1><p class="muted">${safe(item.group||'未分类')}</p><img class="image-front-full" src="${safe(item.url)}" alt="${safe(item.alt||'')}"><section class="form-section"><h2>图片介绍</h2><div class="markdown image-front-body"></div></section></article>`;
  const body=box.querySelector('.image-front-body');
- if(item.body?.trim())markdownInto(body,item.body);else body.textContent='这张图片暂时还没有介绍。';
+ if(item.body?.trim())markdownInto(body,item.body,item.bodyFiles);else body.textContent='这张图片暂时还没有介绍。';
  document.querySelector('#front').showModal();
 }
 async function librarySubmit(form){

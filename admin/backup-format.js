@@ -20,6 +20,7 @@
   for(const project of snapshot.projects){add(project.coverFile);for(const file of project.detailFiles||[])add(file)}
   for(const article of snapshot.articles)add(article.coverFile);
   for(const image of snapshot.images)add(image);
+  for(const item of [...snapshot.projects,...snapshot.articles,...snapshot.images])for(const file of item.bodyFiles||[])add(file);
   add(snapshot.profile.avatarFile||snapshot.profile.avatar);
   return [...paths];
  }
@@ -38,6 +39,7 @@
   for(const snapshot of [result.draft,result.published]){
    for(const project of snapshot.projects){canonical(project.coverFile);for(const file of project.detailFiles||[])canonical(file)}
    snapshot.articles.forEach(item=>canonical(item.coverFile));snapshot.images.forEach(canonical);canonical(snapshot.profile.avatarFile);
+   for(const item of [...snapshot.projects,...snapshot.articles,...snapshot.images])for(const file of item.bodyFiles||[])canonical(file);
    snapshot.profile.avatar=snapshot.profile.avatarFile?mediaPath(snapshot.profile.avatarFile.path):mediaPath(snapshot.profile.avatar);
   }
   return result;

@@ -58,6 +58,8 @@ function render(){
  const sub={projects:'管理项目、封面、进度和访问地址。',articles:'编辑知识库条目与封面。',images:'上传图片，编辑分类与介绍。',profile:'设置首页介绍、头像和联系方式。',home:'设置首页首图和「最近，正在着迷」的推荐内容。',maintenance:'保留自己的完整副本，找回误删或需要回退的内容。'};
  const extra=isLibrary()?libraryActions():tab==='projects'?(projectOpen?'<button class="btn" data-project="back">返回项目列表</button>':'<button class="btn primary" data-project="new">新建项目</button>'):'';
  main.innerHTML=`<div class="heading"><div><h1>${tab==='projects'&&projectOpen?'编辑项目':labels[tab]}</h1><p class="muted">${sub[tab]}</p></div><div>${extra}</div></div>`+(isLibrary()?libraryContent():tab==='projects'?(projectOpen?projectEditor():projectList()):tab==='home'?homeEditor():tab==='maintenance'?maintenancePage():profile())+pendingDeletionPanel();
+ const editor=main.querySelector('[data-body-editor]');
+ if(editor)mountBodyEditor(editor,(tab==='images'?photos:records[tab])[selected]||{});
  if(tab==='maintenance')maintenanceMount();
 }
 function pendingDeletionPanel(){

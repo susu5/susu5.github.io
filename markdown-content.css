@@ -21,3 +21,27 @@
   font-weight: 700;
   line-height: 1.5;
 }
+
+.markdown-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-block: 0.75em;
+}
+
+.markdown-content table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.markdown-content :is(th, td) {
+  min-width: 5em;
+  padding: 0.45em 0.7em;
+  border: 1px solid var(--line);
+  text-align: start;
+  vertical-align: top;
+}
+
+.markdown-content th { background: var(--wash, var(--soft)); }

@@ -63,7 +63,7 @@ function projectEditor(){
  return `<div class="project-editor"><section class="panel"><div class="panel-head"><h2>项目内容</h2><span class="number">NO. ${String(p.id).padStart(3,'0')}</span></div><form id="project-record"><div class="pad">
  <label>项目标题<input name="title" value="${safe(p.title)}" maxlength="24" required><small class="muted">最多 24 个字符</small></label>
  <div class="form-grid">${field('summary','一句话简介',p.summary)}<label>项目进度<select name="state">${['进行中','已完成'].map(s=>option(s,s,p.state)).join('')}</select></label></div>
- <section class="form-section"><div class="section-bar"><h3>正文 · Markdown</h3><button type="button" class="btn" data-project="markdown">预览正文</button></div><textarea name="body" class="md-input" aria-label="Markdown 正文">${safe(p.body)}</textarea><div class="md-result markdown" hidden></div></section>
+ ${bodyEditorMarkup(p)}
  <section class="form-section"><h3>项目图片</h3><div class="upload-grid">${dropZone('cover','项目封面 · 单张')}${dropZone('images','详情配图 · 可多张')}</div></section>
  <section class="form-section"><h3>项目地址</h3><p class="muted">前台详情页在「项目链接」区按平台名称显示访问按钮。</p><div id="links">${(p.links.length?p.links:[{}]).map(l=>linkRow(l.platform,l.url)).join('')}</div><button type="button" class="btn" data-action="add-link">＋ 添加地址</button></section>
  ${projectRelatedEditor()}
@@ -76,7 +76,7 @@ function readProject(form){
  const links=data.getAll('platform').map((platform,i)=>({platform:platform.trim(),url:urls[i].trim()})).filter(l=>l.platform||l.url);
  const title=data.get('title').trim();
  if(!title||links.some(l=>!l.platform||!/^https?:\/\//i.test(l.url))){message('请填写标题，并为每条项目地址填写平台及有效网址');return null}
- return {title,summary:data.get('summary'),state:data.get('state'),body:data.get('body'),links,coverFile:uploads.cover,detailFiles:[...uploads.images],relatedArticleIds:selectedProjectArticleIds()};
+ return {title,summary:data.get('summary'),state:data.get('state'),body:data.get('body'),...form.querySelector?.('[data-body-editor]')?.readBody(),links,coverFile:uploads.cover,detailFiles:[...uploads.images],relatedArticleIds:selectedProjectArticleIds()};
 }
 async function addFiles(kind,files){
  const list=Array.from(files||[]);if(!list.length)return;
@@ -93,11 +93,11 @@ async function addFiles(kind,files){
  }catch(error){message(error.message)}
 }
 function refreshTiles(kind){main.querySelector(`[data-tiles="${kind}"]`).innerHTML=tiles(kind)}
-function markdownInto(target,source){renderContentMarkdown(target,source,{preview:true})}
+function markdownInto(target,source,media){renderContentMarkdown(target,source,{preview:true,media})}
 function showFront(p){
  const box=document.querySelector('#front-content');
  box.innerHTML=`<p class="number">项目 ${records.projects[selected].id} · 前台预览</p><h1>${safe(p.title)}</h1><p class="muted">${safe(p.summary)}</p>${SUSU_COVERS.render('projects',{...records.projects[selected],...p})}${p.links.length?`<section class="form-section"><h2>项目链接</h2><div class="front-links">${p.links.map(l=>`<a class="btn primary" href="${safe(l.url)}" target="_blank" rel="noopener noreferrer">${safe(l.platform)} ↗</a>`).join('')}</div></section>`:''}<div class="markdown"></div>${p.detailFiles.map(coverImage).join('')}${projectRelatedPreview(p.relatedArticleIds)}`;
- markdownInto(box.querySelector('.markdown'),p.body);
+ markdownInto(box.querySelector('.markdown'),p.body,p.bodyFiles);
  document.querySelector('#front').showModal();
 }
 function projectAction(b){
@@ -116,11 +116,6 @@ function projectAction(b){
  if(action==='remove'){
   if(arg==='cover')uploads.cover=null;else uploads.images.splice(Number(index),1);
   refreshTiles(arg);markDirty();
- }
- if(action==='markdown'){
-  const input=main.querySelector('.md-input'),out=main.querySelector('.md-result');
-  if(out.hidden)markdownInto(out,input.value);
-  out.hidden=!out.hidden;input.hidden=!out.hidden;b.textContent=out.hidden?'预览正文':'继续编辑';
  }
  if(action==='front'||action==='publish'){
   const p=readProject(main.querySelector('#project-record'));if(!p)return true;
