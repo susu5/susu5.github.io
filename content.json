@@ -175,16 +175,6 @@
   ],
   "arts": [
     {
-      "id": "6",
-      "url": "assets/leaves.webp",
-      "name": "午后的枝叶",
-      "alt": "午后的枝叶",
-      "width": 1536,
-      "height": 1024,
-      "group": "植物",
-      "body": ""
-    },
-    {
       "id": "1",
       "url": "assets/mountain-study.webp",
       "name": "山海来信",
@@ -231,6 +221,18 @@
       "body": "A Cabin Far Away\n\n- 比例 3:4\n- 图片尺寸 1086 × 1448 px\n- 创作模型 ImageGen\n- 作者 susu\n\n\n### 中文提示词\n\n~~~text\n为个人 AI 艺术画廊创作一幅风格化的原创艺术插画，采用 3:4 竖幅构图。安静的高山森林中，一座深色木材建造的小型现代木屋独自伫立，只有一扇窗亮着温暖的橙光。周围是深翡翠绿和蓝绿色的常绿树，薄雾萦绕在山坡之间，远处是层叠的山脉与浅暖象牙白的天空。上方天空留出优雅的留白。\n\n呈现精致的电影感、绘画般的细节、有触感的天然材质，以及博物馆级艺术印刷质感。氛围静谧，适合凝视。光线细腻，以浓郁的森林绿衬托暖铜橙色窗光。避免界面、画框、文字、字母、数字、标牌、人物、标志、边框和水印。\n~~~\n\n### 英文原始提示词\n\n~~~text\nUse case: stylized-concept. Asset type: a single original vertical fine art illustration for a personal AI art gallery, no interface or frame. A solitary small modern cabin made of dark timber in a quiet alpine forest, one glowing warm orange window, deep emerald and teal evergreen trees, mist between slopes, distant layered mountains and a pale warm ivory sky. Refined cinematic art illustration with painterly detail and tactile natural materials, sophisticated museum print aesthetic, serene and contemplative, subtle light, rich forest greens balanced with warm copper orange light. Portrait 3:4 composition with elegant negative space in the upper sky. No text, lettering, numbers, signs, people, logos, borders or watermarks.\n~~~",
       "updatedAt": "2026-11-04T15:21:43.267Z",
       "publishedAt": "2026-11-04T15:21:46.706Z"
+    },
+    {
+      "id": "6",
+      "url": "assets/leaves.webp",
+      "name": "午后的枝叶",
+      "alt": "午后的枝叶",
+      "width": 1536,
+      "height": 1024,
+      "group": "植物",
+      "body": "Afternoon Leaves\n\n- 比例 3:2\n- 图片尺寸 1536 × 1024 px\n- 创作模型 ImageGen\n- 作者 susu\n\n\n### 中文提示词\n\n~~~text\n为一座风格静谧的当代艺术画廊创作一幅写实自然的原创作品，采用 3:2 横幅构图。午后阳光穿过深绿色叶片，在粗糙的象牙白灰泥墙上投下清晰、细腻而自然的叶影。画面右下方，一只简单的暖米白色陶瓷花瓶里伸出一根纤细枝条，点缀一朵低调的铜橙色小花。\n\n以疏朗、精致的静物构图保留充足空间，表现有触感的石灰涂层墙面。采用暖奶白、森林绿和铜橙色，呈现胶片艺术摄影的质感。光影符合真实的自然光学效果，保留植物自然的不规则感，整体平静而真实。只生成画作。避免网站界面、文字、标签、画框、边框、水印和标志。\n~~~\n\n### 英文原始提示词\n\n~~~text\nUse case: photorealistic-natural. Asset type: original artwork for a quiet contemporary art portfolio gallery. Create ONE horizontal 3:2 composition of afternoon sunlight passing through deep green leaves, casting sharp delicate organic leaf shadows onto a rough ivory plaster wall. A slender branch in a simple warm offwhite ceramic vase enters from the lower right; one small restrained copper orange flower. A sparse refined still life with beautiful space, tactile limewash surface, warm paper cream, forest green and copper orange palette, analog fine-art photography quality. Convincing natural optics, elegant light and shadow, peaceful imperfect organic realism. No lettering, no label, no frame, no border, no watermark, no logo. Artwork only, no website UI.",
+      "updatedAt": "2026-11-04T15:21:52.084Z",
+      "publishedAt": "2026-11-04T15:21:55.643Z"
     }
   ],
   "profile": {
@@ -256,5 +258,5 @@
     "植物",
     "建筑"
   ],
-  "_cmsRevision": 30
+  "_cmsRevision": 32
 }
