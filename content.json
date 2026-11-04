@@ -175,16 +175,6 @@
   ],
   "arts": [
     {
-      "id": "3",
-      "url": "assets/fern.webp",
-      "name": "蕨的独白",
-      "alt": "蕨的独白",
-      "width": 1024,
-      "height": 1536,
-      "group": "植物",
-      "body": ""
-    },
-    {
       "id": "4",
       "url": "assets/doorway.webp",
       "name": "门后的晴天",
@@ -225,6 +215,18 @@
       "body": "Letters from Mountains and Seas\n\n- 比例 2:1\n- 图片尺寸 1774 × 887 px\n- 创作模型 ImageGen\n- 作者 susu\n\n### 中文提示词\n\n~~~text\n创作一幅风格化的原创艺术作品，用于一位独立中国艺术家的作品集。画面采用宽幅 2:1 全景构图，呈现博物馆级的当代风景。下半部是一片极其平静的浅玉色湖面。低矮狭长的深绿色岩岛上，一株被风塑成雕塑般姿态的松树略偏画面中心左侧。层叠的雄伟山峦在银灰色雾气中逐渐隐去，上方是大片柔和的象牙白天空。湖面只留一道细细的暖阳反光。\n\n以绿黑、青瓷绿、石灰色和暖象牙白为主，几乎不用高饱和色。融合大画幅风光摄影与半透明矿物颜料绘画的质感。空气静谧，岩石富有触感，画面带有自然细腻的颗粒。只在近处小岛保留清晰的植物细节，其余区域留出明亮而有空气感的空间。整体像一本经过精心编辑的收藏级艺术画册，呈现深沉的静谧感。目标分辨率 3840 × 1920。避免网页样机、奇幻之门、发光球体、橙色落日、人物、建筑、画框、文字和水印。\n\n~~~\n\n### 英文原始提示词\n\n~~~text\nUse case: stylized-concept. Asset type: one original fine-art image for an independent Chinese artist's portfolio, not a web mockup, no typography. Create a museum-quality contemporary landscape in a wide 2:1 panoramic composition. A very still pale jade lake occupies the lower half, with a slender low dark-green rocky island and one sculptural wind-shaped pine slightly left of center. Monumental layered mountains recede through silver-grey mist into a huge soft ivory sky; one fine seam of warm sunlight on the water. Restrained green-black, celadon, stone grey and warm ivory palette, almost no saturated color. A sophisticated blend of large-format landscape photography and translucent mineral pigment painting, quiet air, tactile stone, delicate grain inherent to the image, crisp botanical detail only in the near island, luminous atmospheric negative space. Composition feels like a carefully edited collector's art book, profound stillness, no fantasy doors, no glowing orb, no orange sunset, no people, no buildings, no framing, no lettering, no watermarks. High resolution 3840 by 1920, wide 2:1 image.",
       "updatedAt": "2026-11-04T15:14:27.980Z",
       "publishedAt": "2026-11-04T14:23:54.148Z"
+    },
+    {
+      "id": "3",
+      "url": "assets/fern.webp",
+      "name": "蕨的独白",
+      "alt": "蕨的独白",
+      "width": 1024,
+      "height": 1536,
+      "group": "植物",
+      "body": "A Fern’s Monologue\n\n- 比例 2:3\n- 图片尺寸 1024 × 1536 px\n- 创作模型 ImageGen\n- 作者 susu\n\n\n### 中文提示词\n\n~~~text\n为艺术作品集创作一幅风格化的原创植物艺术作品，采用 2:3 竖幅构图。仔细描绘一枝优雅的蕨叶，旁边点缀几枝较小的蕨叶。森林绿的小叶精细繁复。画面以十九世纪植物标本版画的方式排布，融入当代艺术摄影的精微细节。\n\n背景是带有细微纤维纹理的暖象牙白纸面，左上方透入一缕克制的暖铜色光。采用优雅的非对称构图，保留充足留白。呈现真实丰富的植物细节，以及安静、精致的博物馆展品质感。只生成画作。避免网站界面、文字、标签、画框、边框、水印和标志。\n~~~\n\n### 英文原始提示词\n\n~~~text\nUse case: stylized-concept. Asset type: original botanical artwork for an art portfolio gallery. Create ONE beautiful vertical 2:3 artwork: a single carefully observed elegant fern frond, with a few smaller companion fronds, very fine intricate forest-green leaflets, laid out as a nineteenth-century botanical specimen print reinterpreted with contemporary fine-art photographic detail. Warm ivory paper background with subtle tactile paper fiber, restrained warm copper light at the top left, graceful asymmetric composition and substantial breathing room. Rich real organic detail, museum gallery quality, quiet and sophisticated. No lettering, no labels, no frame, no borders, no watermark, no logo. This is only artwork, no website UI.\n~~~",
+      "updatedAt": "2026-11-04T15:15:10.043Z",
+      "publishedAt": "2026-11-04T15:15:13.750Z"
     }
   ],
   "profile": {
@@ -250,5 +252,5 @@
     "植物",
     "建筑"
   ],
-  "_cmsRevision": 16
+  "_cmsRevision": 19
 }
