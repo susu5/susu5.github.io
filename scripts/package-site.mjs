@@ -5,7 +5,7 @@ import {fileURLToPath} from 'node:url';
 const root=resolve(fileURLToPath(new URL('..',import.meta.url)));
 const output=resolve(root,'_site');
 await mkdir(output,{recursive:false});
-const roots=['assets','admin','index.html','CNAME','.nojekyll','content.json','content-loader.js','content-rules.js','content-covers.js','content-covers.css','markdown-content.js','markdown-content.css','site.js','style.css','jade.css','marked.umd.js','marked-LICENSE.md'];
+const roots=['assets','admin','index.html','CNAME','.nojekyll','content.json','content-loader.js','content-rules.js','content-covers.js','content-covers.css','markdown-content.js','markdown-content.css','site.js','style.css','jade.css','theme.css','theme.js','marked.umd.js','marked-LICENSE.md'];
 async function rejectLinks(path){
  const stat=await lstat(path);if(stat.isSymbolicLink())throw new Error('Deployment cannot contain symbolic links');
  if(stat.isDirectory())for(const name of await readdir(path))await rejectLinks(resolve(path,name));

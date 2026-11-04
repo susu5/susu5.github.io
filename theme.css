@@ -1,0 +1,116 @@
+:root {
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #111a17;
+  --card: #192720;
+  --ink: #e7f0e9;
+  --muted: #aabfb1;
+  --line: #334b40;
+  --soft: #1d2d25;
+  --wash: #111a17;
+  --forest: #90d8b8;
+  --accent: #90d8b8;
+  --jade: #90d8b8;
+  --signal: #c3e995;
+  --lime: var(--signal);
+  --theme-ink-on-accent: #14261d;
+  --theme-border: #577a69;
+  --theme-selected: #243b30;
+  --theme-primary: #22654f;
+  --theme-primary-hover: #2b735a;
+  --theme-error-bg: #3d2522;
+  --theme-error: #ffb6ab;
+  --theme-warning: #f3cd89;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 9px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  font: 13px/1 system-ui, sans-serif;
+  white-space: nowrap;
+}
+.theme-toggle:hover { color: var(--jade, var(--forest)); background: var(--soft, var(--wash)); }
+.theme-toggle:focus-visible { outline: 2px solid var(--jade, var(--forest)); outline-offset: 3px; }
+.theme-toggle svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.55; stroke-linecap: round; stroke-linejoin: round; }
+.theme-sun, :root[data-theme="dark"] .theme-moon { display: none; }
+:root[data-theme="dark"] .theme-sun { display: initial; }
+
+.site-header-actions, .login-header-actions {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 16px;
+}
+@media (601px <= width <= 1100px) {
+  .top { grid-template-columns: auto 1fr auto; gap: 20px; }
+}
+@media (max-width: 600px) {
+  .top { grid-template-columns: 1fr auto; }
+  .top nav { grid-column: 1 / -1; }
+  .nav-en { font-size: 11px; }
+  .site-header-actions { grid-column: 2; grid-row: 1; }
+}
+@media (max-width: 480px) {
+  .shell .admin-header-actions { gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .shell header:has(.admin-header-actions) { flex-wrap: wrap; gap: 6px 12px; }
+  .shell .admin-header-actions { margin-inline-start: auto; }
+  .login-header-actions { gap: 12px; }
+}
+
+:root[data-theme="dark"] ::selection { background: var(--signal); color: var(--theme-ink-on-accent); }
+:root[data-theme="dark"] ::-webkit-scrollbar-thumb { background: var(--theme-border); }
+:root[data-theme="dark"] .theme-toggle { border-color: var(--theme-border); }
+:root[data-theme="dark"] .content-cover { background: var(--theme-selected); color: var(--forest); }
+:root[data-theme="dark"] .content-cover--image { background: var(--soft); }
+:root[data-theme="dark"] .content-cover--project { background: var(--theme-primary); color: #fff; }
+
+.site-page[data-theme="dark"] :is(.cover, .cover-reading, .cover-website, .cover-essay) { background: var(--soft); color: var(--ink); }
+.site-page[data-theme="dark"] :is(.cover-reading .cover-edition, .caption-divider) { color: var(--muted); }
+.site-page[data-theme="dark"] :is(.cover-collection, .wall-heading > .text-link, .solid, .wall-ai-label, .skip) {
+  background: var(--theme-primary);
+  color: #fff;
+}
+.site-page[data-theme="dark"] :is(.wall-heading > .text-link, .solid, .skip):hover { background: var(--theme-primary-hover); }
+.site-page[data-theme="dark"] :is(.agent-label, .toggle button[aria-pressed="true"], .filter button[aria-pressed="true"]) { color: var(--theme-ink-on-accent); }
+.site-page[data-theme="dark"] .cell { background: var(--card); }
+.site-page[data-theme="dark"] .cell.done { background: var(--forest); color: var(--theme-ink-on-accent); }
+.site-page[data-theme="dark"] button.cell:hover { background: var(--theme-primary-hover); color: #fff; }
+.site-page[data-theme="dark"] .dot.empty { background: var(--card); border-color: var(--theme-border); }
+.site-page[data-theme="dark"] .overlay { background: #080e0bbf; }
+.site-page[data-theme="dark"] .hand { box-shadow: 0 12px 20px -18px #0007; }
+.site-page[data-theme="dark"] .dialog { background: var(--card); box-shadow: 0 24px 64px -24px #0008; }
+
+.admin-page[data-theme="dark"] :is(aside, header, .panel, .row, .btn, input, textarea, select, dialog, .body-editor-frame, .login-screen) {
+  background: var(--card);
+}
+.admin-page[data-theme="dark"] .login-top { background: transparent; }
+.admin-page[data-theme="dark"] :is(.btn, input, textarea, select, .drop-zone) { border-color: var(--theme-border); }
+.admin-page[data-theme="dark"] :is(input, textarea)::placeholder { color: var(--muted); opacity: 1; }
+.admin-page[data-theme="dark"] :is(.btn:hover, .row:hover, .row.active, nav button[aria-current="page"], .filters button[aria-pressed="true"], .body-tool:hover, .body-tool[aria-pressed="true"], .drop-zone.dragging) {
+  background: var(--theme-selected);
+}
+.admin-page[data-theme="dark"] :is(.primary, .login-provider) { background: var(--theme-primary); border-color: var(--theme-border); color: #fff; }
+.admin-page[data-theme="dark"] .btn.primary:hover,
+.admin-page[data-theme="dark"] .login-provider:hover { background: var(--theme-primary-hover); }
+.admin-page[data-theme="dark"] :is(.table-scroll th, .drop-zone, .body-toolbar, .body-link, .markdown-content pre, .markdown-content th) { background: var(--soft); }
+.admin-page[data-theme="dark"] :is(.status, .status.done, .publication-status, .maintenance-progress) { background: var(--theme-selected); color: var(--jade); }
+.admin-page[data-theme="dark"] .status.draft { background: var(--soft); color: var(--muted); }
+.admin-page[data-theme="dark"] .status.doing { background: #3a3020; color: var(--theme-warning); }
+.admin-page[data-theme="dark"] :is(.pending-note, .project-related-unavailable) { color: var(--theme-warning); }
+.admin-page[data-theme="dark"] :is(.publication-status.error, .login-feedback.error, .maintenance-progress.error) {
+  background: var(--theme-error-bg);
+  color: var(--theme-error);
+}
+.admin-page[data-theme="dark"] .danger { color: var(--theme-error); border-color: #a76a61; }
+.admin-page[data-theme="dark"] dialog::backdrop { background: #080e0bbf; }
+.admin-page[data-theme="dark"] .toast { background: var(--theme-selected); color: var(--ink); border: 1px solid var(--theme-border); }

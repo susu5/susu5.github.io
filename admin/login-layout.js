@@ -1,7 +1,7 @@
 const loginScreen = document.getElementById('login');
 const adminShell = document.getElementById('shell');
 loginScreen.innerHTML = `
-  <header class="login-top"><span class="login-wordmark">Susu.</span><a href="https://susu5.cn/" target="_blank" rel="noopener">返回网站<svg class="login-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a></header>
+  <header class="login-top"><span class="login-wordmark">Susu.</span><div class="login-header-actions"><a href="https://susu5.cn/" target="_blank" rel="noopener">返回网站<svg class="login-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><button type="button" class="theme-toggle" data-theme-toggle hidden></button></div></header>
   <div class="login-body">
     <section class="login-story" aria-label="Susu 的创作空间"><h2>把好奇心，<span>做成作品。</span></h2><figure><img class="login-landscape" src="../assets/mountain-study.webp" width="1774" height="887" alt="松树与玉色湖面，远山在薄雾中隐去"><figcaption><span>一处安放好奇心的地方。</span><span>susu5.cn</span></figcaption></figure></section>
     <section class="login-card" aria-labelledby="login-title"><img class="login-portrait" src="../assets/susu-avatar.png" width="58" height="58" alt="Susu 的蓝发头像"><h1 id="login-title">登录后台</h1><p class="login-lede">管理项目、知识库和图片，<br>让每一次更新都有自己的位置。</p><div class="login-account"><span>站点管理账号</span><strong>susu5</strong></div>
