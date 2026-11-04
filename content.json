@@ -175,16 +175,6 @@
   ],
   "arts": [
     {
-      "id": "5",
-      "url": "assets/cabin.webp",
-      "name": "远方的小屋",
-      "alt": "远方的小屋",
-      "width": 1086,
-      "height": 1448,
-      "group": "建筑",
-      "body": ""
-    },
-    {
       "id": "6",
       "url": "assets/leaves.webp",
       "name": "午后的枝叶",
@@ -229,6 +219,18 @@
       "body": "Clear Skies Beyond the Door\n\n- 比例 1:1\n- 图片尺寸 1254 × 1254 px\n- 创作模型 ImageGen\n- 作者 susu\n\n### 中文提示词\n\n~~~text\n为个人 AI 艺术作品集创作一幅风格化的独立正方形画作。画面呈现极简的超现实建筑场景。一扇暖陶土橙色的门嵌在奶油象牙白的灰泥墙里，门后是清澈的浅蓝天空与静谧的深绿色森林。午后阳光形成鲜明的几何光块，在暖色石材地面上拉出柔和的长影。用一株小小的深绿色植物作点缀。\n\n画面有梦境般的氛围，也能感受到真实的材质。保留细致的灰泥纹理、静谧的电影式构图与博物馆级艺术印刷质感。配色克制，以暖象牙白、森林绿和陶土铜橙为主。避免界面、样机、人物、文字、数字、字母、标志、边框和水印。\n~~~\n\n### 英文原始提示词\n\n~~~text\nUse case: stylized-concept. Asset type: original gallery artwork for a personal AI art portfolio, a single square artwork, no UI or mockup. Minimal surreal architecture: a warm terracotta orange doorway set in creamy ivory plaster walls, opening toward a clear pale blue sky and a quiet deep green forest beyond. Strong geometric afternoon sunlight and a long soft shadow across warm stone, a small deep green plant. Dreamlike yet tactile, refined museum print quality, detailed plaster texture, serene cinematic composition, restrained palette of warm ivory, forest green, terracotta copper orange. Square composition, premium fine art image. No people, text, numbers, letters, logos, borders or watermark.\n~~~\n",
       "updatedAt": "2026-11-04T15:17:28.843Z",
       "publishedAt": "2026-11-04T15:17:32.249Z"
+    },
+    {
+      "id": "5",
+      "url": "assets/cabin.webp",
+      "name": "远方的小屋",
+      "alt": "远方的小屋",
+      "width": 1086,
+      "height": 1448,
+      "group": "建筑",
+      "body": "A Cabin Far Away\n\n- 比例 3:4\n- 图片尺寸 1086 × 1448 px\n- 创作模型 ImageGen\n- 作者 susu\n\n\n### 中文提示词\n\n~~~text\n为个人 AI 艺术画廊创作一幅风格化的原创艺术插画，采用 3:4 竖幅构图。安静的高山森林中，一座深色木材建造的小型现代木屋独自伫立，只有一扇窗亮着温暖的橙光。周围是深翡翠绿和蓝绿色的常绿树，薄雾萦绕在山坡之间，远处是层叠的山脉与浅暖象牙白的天空。上方天空留出优雅的留白。\n\n呈现精致的电影感、绘画般的细节、有触感的天然材质，以及博物馆级艺术印刷质感。氛围静谧，适合凝视。光线细腻，以浓郁的森林绿衬托暖铜橙色窗光。避免界面、画框、文字、字母、数字、标牌、人物、标志、边框和水印。\n~~~\n\n### 英文原始提示词\n\n~~~text\nUse case: stylized-concept. Asset type: a single original vertical fine art illustration for a personal AI art gallery, no interface or frame. A solitary small modern cabin made of dark timber in a quiet alpine forest, one glowing warm orange window, deep emerald and teal evergreen trees, mist between slopes, distant layered mountains and a pale warm ivory sky. Refined cinematic art illustration with painterly detail and tactile natural materials, sophisticated museum print aesthetic, serene and contemplative, subtle light, rich forest greens balanced with warm copper orange light. Portrait 3:4 composition with elegant negative space in the upper sky. No text, lettering, numbers, signs, people, logos, borders or watermarks.\n~~~",
+      "updatedAt": "2026-11-04T15:21:43.267Z",
+      "publishedAt": "2026-11-04T15:21:46.706Z"
     }
   ],
   "profile": {
@@ -254,5 +256,5 @@
     "植物",
     "建筑"
   ],
-  "_cmsRevision": 25
+  "_cmsRevision": 30
 }
