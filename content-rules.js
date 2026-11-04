@@ -47,5 +47,5 @@
     }
     return { hero, featured, heroMode, featuredMode };
   }
-  root.SUSU_CONTENT = { idOf, isPublished, latest, isLandscape, resolveHome };
+  root.SUSU_CONTENT = { idOf, isPublished, timeOf, latest, isLandscape, resolveHome };
 })(globalThis);
