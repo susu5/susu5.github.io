@@ -10,7 +10,8 @@
       "body": "这个项目从一个很小的需要开始：把遇见的想法留在一个容易找回的地方。它不追求替代所有笔记工具，只希望让收藏和回看变得轻松。",
       "coverFile": null,
       "detailFiles": [],
-      "links": []
+      "links": [],
+      "relatedArticleIds": []
     },
     {
       "id": 2,
@@ -39,7 +40,8 @@
           "alt": "暖色拱门通向绿林"
         }
       ],
-      "links": []
+      "links": [],
+      "relatedArticleIds": []
     },
     {
       "id": 3,
@@ -51,7 +53,8 @@
       "body": "这是一个还在探索中的小实验。先记录阅读时真正触动自己的片段，再尝试找出它们之间的关联。不急着定义完整的功能。",
       "coverFile": null,
       "detailFiles": [],
-      "links": []
+      "links": [],
+      "relatedArticleIds": []
     },
     {
       "id": 4,
@@ -63,7 +66,8 @@
       "body": "首页留给作品和正在发生的事情，内页留给阅读。比起把每一页做得特别，我更希望内容能够自然地被找到。",
       "coverFile": null,
       "detailFiles": [],
-      "links": []
+      "links": [],
+      "relatedArticleIds": []
     }
   ],
   "notes": [
@@ -229,7 +233,7 @@
     "wechat": "sunbacon",
     "wechatPublic": "根叔分享",
     "github": "susu5",
-    "email": "",
+    "email": "pptkevin@qq.com",
     "avatar": "assets/susu-avatar.png"
   },
   "home": {
@@ -244,5 +248,5 @@
     "植物",
     "建筑"
   ],
-  "_cmsRevision": 6
+  "_cmsRevision": 8
 }
