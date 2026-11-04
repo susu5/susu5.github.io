@@ -58,7 +58,7 @@
     },
     {
       "id": 4,
-      "name": "个人网站Susu，",
+      "name": "个人网站Susu",
       "desc": "安放作品、画作与日常积累的地方。",
       "status": "已完成",
       "type": "网站",
@@ -90,7 +90,7 @@
       ],
       "links": [],
       "relatedArticleIds": [],
-      "updatedAt": "2026-11-04T16:09:46.614Z",
+      "updatedAt": "2026-11-04T16:31:18.782Z",
       "publishedAt": "2026-11-04T16:02:41.366Z"
     }
   ],
@@ -296,5 +296,5 @@
     "植物",
     "建筑"
   ],
-  "_cmsRevision": 39
+  "_cmsRevision": 41
 }
