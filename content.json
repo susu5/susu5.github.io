@@ -175,16 +175,6 @@
   ],
   "arts": [
     {
-      "id": "4",
-      "url": "assets/doorway.webp",
-      "name": "门后的晴天",
-      "alt": "门后的晴天",
-      "width": 1254,
-      "height": 1254,
-      "group": "建筑",
-      "body": ""
-    },
-    {
       "id": "5",
       "url": "assets/cabin.webp",
       "name": "远方的小屋",
@@ -227,6 +217,18 @@
       "body": "A Fern’s Monologue\n\n- 比例 2:3\n- 图片尺寸 1024 × 1536 px\n- 创作模型 ImageGen\n- 作者 susu\n\n\n### 中文提示词\n\n~~~text\n为艺术作品集创作一幅风格化的原创植物艺术作品，采用 2:3 竖幅构图。仔细描绘一枝优雅的蕨叶，旁边点缀几枝较小的蕨叶。森林绿的小叶精细繁复。画面以十九世纪植物标本版画的方式排布，融入当代艺术摄影的精微细节。\n\n背景是带有细微纤维纹理的暖象牙白纸面，左上方透入一缕克制的暖铜色光。采用优雅的非对称构图，保留充足留白。呈现真实丰富的植物细节，以及安静、精致的博物馆展品质感。只生成画作。避免网站界面、文字、标签、画框、边框、水印和标志。\n~~~\n\n### 英文原始提示词\n\n~~~text\nUse case: stylized-concept. Asset type: original botanical artwork for an art portfolio gallery. Create ONE beautiful vertical 2:3 artwork: a single carefully observed elegant fern frond, with a few smaller companion fronds, very fine intricate forest-green leaflets, laid out as a nineteenth-century botanical specimen print reinterpreted with contemporary fine-art photographic detail. Warm ivory paper background with subtle tactile paper fiber, restrained warm copper light at the top left, graceful asymmetric composition and substantial breathing room. Rich real organic detail, museum gallery quality, quiet and sophisticated. No lettering, no labels, no frame, no borders, no watermark, no logo. This is only artwork, no website UI.\n~~~",
       "updatedAt": "2026-11-04T15:16:31.899Z",
       "publishedAt": "2026-11-04T15:15:13.750Z"
+    },
+    {
+      "id": "4",
+      "url": "assets/doorway.webp",
+      "name": "门后的晴天",
+      "alt": "门后的晴天",
+      "width": 1254,
+      "height": 1254,
+      "group": "建筑",
+      "body": "Clear Skies Beyond the Door\n\n- 比例 1:1\n- 图片尺寸 1254 × 1254 px\n- 创作模型 ImageGen\n- 作者 susu\n\n### 中文提示词\n\n~~~text\n为个人 AI 艺术作品集创作一幅风格化的独立正方形画作。画面呈现极简的超现实建筑场景。一扇暖陶土橙色的门嵌在奶油象牙白的灰泥墙里，门后是清澈的浅蓝天空与静谧的深绿色森林。午后阳光形成鲜明的几何光块，在暖色石材地面上拉出柔和的长影。用一株小小的深绿色植物作点缀。\n\n画面有梦境般的氛围，也能感受到真实的材质。保留细致的灰泥纹理、静谧的电影式构图与博物馆级艺术印刷质感。配色克制，以暖象牙白、森林绿和陶土铜橙为主。避免界面、样机、人物、文字、数字、字母、标志、边框和水印。\n~~~\n\n### 英文原始提示词\n\n~~~text\nUse case: stylized-concept. Asset type: original gallery artwork for a personal AI art portfolio, a single square artwork, no UI or mockup. Minimal surreal architecture: a warm terracotta orange doorway set in creamy ivory plaster walls, opening toward a clear pale blue sky and a quiet deep green forest beyond. Strong geometric afternoon sunlight and a long soft shadow across warm stone, a small deep green plant. Dreamlike yet tactile, refined museum print quality, detailed plaster texture, serene cinematic composition, restrained palette of warm ivory, forest green, terracotta copper orange. Square composition, premium fine art image. No people, text, numbers, letters, logos, borders or watermark.\n~~~\n",
+      "updatedAt": "2026-11-04T15:17:28.843Z",
+      "publishedAt": "2026-11-04T15:17:32.249Z"
     }
   ],
   "profile": {
@@ -252,5 +254,5 @@
     "植物",
     "建筑"
   ],
-  "_cmsRevision": 22
+  "_cmsRevision": 25
 }
