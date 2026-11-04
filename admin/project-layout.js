@@ -93,18 +93,7 @@ async function addFiles(kind,files){
  }catch(error){message(error.message)}
 }
 function refreshTiles(kind){main.querySelector(`[data-tiles="${kind}"]`).innerHTML=tiles(kind)}
-function markdownInto(target,source){
- const template=document.createElement('template');
- template.innerHTML=marked.parse(source||'');
- const allowed=new Set('P H1 H2 H3 H4 H5 H6 BLOCKQUOTE PRE CODE UL OL LI TABLE THEAD TBODY TR TH TD STRONG EM DEL HR BR A'.split(' '));
- for(const el of [...template.content.querySelectorAll('*')]){
-  if(!allowed.has(el.tagName)){el.remove();continue}
-  const href=el.getAttribute('href');
-  for(const attr of [...el.attributes])el.removeAttribute(attr.name);
-  if(el.tagName==='A'&&/^https?:\/\//i.test(href||'')){el.href=href;el.target='_blank';el.rel='noopener noreferrer'}
- }
- target.replaceChildren(template.content);
-}
+function markdownInto(target,source){renderContentMarkdown(target,source,{preview:true})}
 function showFront(p){
  const box=document.querySelector('#front-content');
  box.innerHTML=`<p class="number">项目 ${records.projects[selected].id} · 前台预览</p><h1>${safe(p.title)}</h1><p class="muted">${safe(p.summary)}</p>${SUSU_COVERS.render('projects',{...records.projects[selected],...p})}${p.links.length?`<section class="form-section"><h2>项目链接</h2><div class="front-links">${p.links.map(l=>`<a class="btn primary" href="${safe(l.url)}" target="_blank" rel="noopener noreferrer">${safe(l.platform)} ↗</a>`).join('')}</div></section>`:''}<div class="markdown"></div>${p.detailFiles.map(coverImage).join('')}${projectRelatedPreview(p.relatedArticleIds)}`;

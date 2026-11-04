@@ -1,0 +1,23 @@
+/* Markdown editing previews and published content share wrapping rules. */
+.markdown-content {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.markdown-content pre {
+  max-width: 100%;
+  padding: 16px;
+  background: var(--soft, var(--wash));
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.markdown-content pre code {
+  white-space: inherit;
+  overflow-wrap: inherit;
+}
+.markdown-content > h3.prompt-heading {
+  margin: 24px 0 8px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
