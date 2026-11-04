@@ -220,7 +220,7 @@ footer{margin-top:64px}
 .image-introduction .prose{max-width:68ch;min-width:0;padding-top:0;overflow-wrap:anywhere}
 .image-introduction .prose>:first-child{margin-top:0}
 .image-introduction .prose h1,.image-introduction .prose h2,.image-introduction .prose h3{font-size:24px;margin-top:28px}
-.image-introduction .prose pre{overflow:auto;background:var(--soft);padding:16px;max-width:100%}
+.image-introduction .prose pre{overflow:auto;background:var(--soft);padding:16px;max-width:100%;white-space:pre-wrap;overflow-wrap:anywhere}
 .image-introduction .prose table{display:block;max-width:100%;overflow:auto;border-collapse:collapse}
 .image-introduction .prose td,.image-introduction .prose th{padding:8px;border:1px solid var(--line)}
 .image-introduction .prose blockquote{margin:16px 0;padding-left:20px;border-left:1px solid var(--forest)}
