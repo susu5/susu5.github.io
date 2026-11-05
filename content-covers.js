@@ -5,7 +5,7 @@
     if (typeof value !== 'string' || !value.trim() || /[\u0000-\u001f]/.test(value)) return '';
     const url = value.trim();
     if (/^[a-z][a-z\d+.-]*:/i.test(url) && !/^(https?:|blob:|file:|data:image\/(?:png|jpeg|webp|gif|avif);base64,)/i.test(url)) return '';
-    return url;
+    return url.startsWith('assets/') ? '/' + url : url;
   }
   function getCover(item) {
     const file = item?.coverFile;

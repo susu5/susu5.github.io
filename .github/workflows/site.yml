@@ -20,9 +20,11 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
+      - name: Install the HTML build dependency
+        run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Check JavaScript, public content and image references
         run: |
-          node --test scripts/validate-site.test.mjs scripts/admin-api.test.cjs scripts/admin-backup.test.cjs
+          node --test scripts/validate-site.test.mjs scripts/admin-api.test.cjs scripts/admin-backup.test.cjs scripts/public-pages.test.mjs
           node scripts/validate-site.mjs
       - name: Package public website
         run: node scripts/package-site.mjs

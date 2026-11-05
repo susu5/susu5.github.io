@@ -84,7 +84,7 @@
 .site-page[data-theme="dark"] :is(.agent-label, .toggle button[aria-pressed="true"], .filter button[aria-pressed="true"]) { color: var(--theme-ink-on-accent); }
 .site-page[data-theme="dark"] .cell { background: var(--card); }
 .site-page[data-theme="dark"] .cell.done { background: var(--forest); color: var(--theme-ink-on-accent); }
-.site-page[data-theme="dark"] button.cell:hover { background: var(--theme-primary-hover); color: #fff; }
+.site-page[data-theme="dark"] a.cell:hover { background: var(--theme-primary-hover); color: #fff; }
 .site-page[data-theme="dark"] .dot.empty { background: var(--card); border-color: var(--theme-border); }
 .site-page[data-theme="dark"] .overlay { background: #080e0bbf; }
 .site-page[data-theme="dark"] .hand { box-shadow: 0 12px 20px -18px #0007; }

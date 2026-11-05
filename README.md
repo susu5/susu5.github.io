@@ -15,7 +15,7 @@ GitHub 密钥、登录会话、草稿和未发布图片由独立服务保管，�
 
 ## 开发
 
-本目录是原生 HTML、CSS、JavaScript 网站，无须构建。请使用本地 HTTP 服务预览，不要直接双击 HTML，因为页面需要读取 JSON。
+本目录是原生 HTML、CSS、JavaScript 网站。预览完整的首页、栏目和详情页时，先执行 `npm ci --ignore-scripts` 和 `node scripts/package-site.mjs`，再以 `_site/` 为根目录启动本地 HTTP 服务。
 
 - site.js：公开网站页面与交互。
 - content-loader.js：加载已发布内容。
@@ -37,6 +37,8 @@ GitHub 密钥、登录会话、草稿和未发布图片由独立服务保管，�
 
 ## 自动检查与发布
 
-需要 Node.js 24。运行 `node --test scripts/validate-site.test.mjs` 和 `node scripts/validate-site.mjs` 检查 JavaScript、公开数据、关联文章、图片文件及私有字段。运行 `node scripts/package-site.mjs` 会新建 `_site/`，只复制网站需要的文件；该目录必须不存在，避免把上次构建残留内容带入新版本。
+需要 Node.js 24。安装构建依赖后运行 `node --test scripts/validate-site.test.mjs scripts/public-pages.test.mjs` 和 `node scripts/validate-site.mjs` 检查 JavaScript、公开数据、静态页面、关联文章、图片文件及私有字段。运行 `node scripts/package-site.mjs` 会新建 `_site/`；该目录必须不存在，避免把上次构建残留内容带入新版本。
 
 GitHub Actions 的 `Check and publish website` 工作流在 main 更新时运行；检查成功才部署到 GitHub Pages。失败时线上保留上一版。手动重试在仓库 Actions 页面进行。Pages 的发布来源需设置为 GitHub Actions；维护记录应注明是否已切换。
+
+每次构建从已发布的内容生成独立 HTML、规范网址、`sitemap.xml` 和 `robots.txt`。后台草稿和管理页不进入站点地图。旧的项目、图片和知识库分享链接会自动打开对应的新网址。
