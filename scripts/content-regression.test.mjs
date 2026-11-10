@@ -18,7 +18,7 @@ const fixtures = {
     { id:2, title:'Old', summary:'栏目B', group:'栏目B', date:'2026-10-02' },
     { id:3, title:'Newest', summary:'栏目B', group:'栏目B', date:'2026-11-09' }
   ],
-  arts:[{ id:'1', name:'Old', url:'assets/old.png' }, { id:'uuid', name:'New', url:'assets/new.png', uploadedAt:'2026-11-09' }]
+  arts:[{ id:'1', name:'Old', url:'assets/old.png', publishedAt:'2026-11-10' }, { id:'uuid', name:'New', url:'assets/new.png', uploadedAt:'2026-11-09' }]
 };
 
 test('one chronology rule includes drafts in admin and excludes them on public pages', async t => {

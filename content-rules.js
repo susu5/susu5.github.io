@@ -3,7 +3,8 @@
   const idOf = item => String(item.key ?? item.id ?? '');
   const isPublished = item => item.publication !== 'draft' && item.state !== '草稿' && item.status !== '草稿';
   const timeOf = (item, kind) => {
-    const dates = kind === 'images' ? [item.uploadedAt, item.createdAt, item.publishedAt]
+    // Publication dates on imported images describe republishing, not uploading.
+    const dates = kind === 'images' ? [item.uploadedAt, item.createdAt]
       : kind === 'projects' ? [item.createdAt, item.publishedAt]
       : [item.publishedAt, item.date, item.createdAt];
     for (const value of dates) {
