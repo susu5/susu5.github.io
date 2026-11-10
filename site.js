@@ -1,7 +1,7 @@
-const projects=window.SITE_DATA.projects.filter(p=>p.publication!=='draft'&&p.state!=='草稿');
-const notes=window.SITE_DATA.notes.filter(p=>p.publication!=='draft'&&p.state!=='草稿');
-const arts=window.SITE_DATA.arts.filter(p=>p.publication!=='draft'&&p.state!=='草稿');
-const galleryArts=[...arts].sort((a,b)=>SUSU_CONTENT.timeOf(b,'images')-SUSU_CONTENT.timeOf(a,'images'));
+const projects=SUSU_CONTENT.latest(window.SITE_DATA.projects,'projects');
+const notes=SUSU_CONTENT.latest(window.SITE_DATA.notes,'articles');
+const arts=SUSU_CONTENT.latest(window.SITE_DATA.arts,'images');
+const galleryArts=arts;
 const { publicPath } = SUSU_PATHS;
 let wallView='overview', artFilter='全部';
 const assetUrl = url => typeof url === 'string' && url.startsWith('assets/') ? '/' + url : url;
@@ -67,7 +67,15 @@ function imageDetail(id){
  const index=galleryArts.indexOf(image),next=galleryArts[(index+1)%galleryArts.length];
  return `<article class="page image-detail"><a href="${publicPath('gallery')}" class="back">${arrow()}返回图片库</a><div class="image-detail-heading"><h1>${esc(image.name)}</h1><span>${esc(image.group||'未分类')}</span></div><figure class="image-full"><img src="${esc(assetUrl(image.url))}" width="${esc(image.width)}" height="${esc(image.height)}" alt="${esc(image.alt||image.name)}"><figcaption><span>${esc(image.width)} × ${esc(image.height)}</span><a href="${esc(assetUrl(image.url))}" target="_blank" rel="noopener noreferrer">查看原图 ${arrow()}</a></figcaption></figure><section class="image-introduction" aria-label="图片介绍"><h2>关于这张图</h2><div class="prose" id="image-body" data-image-id="${esc(image.id)}"></div></section><nav class="end-nav" aria-label="图片导航"><a href="${publicPath('gallery')}">${arrow()}全部图片</a>${next&&next!==image?`<a href="${imagePath(next)}">下一张图片 ${arrow()}</a>`:''}</nav></article>`;
 }
-function knowledge(){const groups=[...new Set(notes.map(note=>note.group||note.summary||'未分类'))];return `<section class="page knowledge-page"><div class="page-head"><h1>知识库</h1><p>写下实践，也留下一些<br>还没想明白的事。</p></div>${groups.map(group=>`<section class="knowledge-group"><h2>${esc(group)}</h2><div class="knowledge-entries">${notes.filter(note=>(note.group||note.summary||'未分类')===group).sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))).map(note=>`<div class="entry"><a href="${publicPath('note',note.id)}">${esc(note.title)}</a>${note.date?`<time datetime="${esc(note.date)}">${esc(note.date.slice(5).replace('-',' / '))}</time>`:''}</div>`).join('')}</div></section>`).join('')}</section>`}
+function knowledge(){
+ // Group adjacent entries only: category labels must never move older articles ahead of newer ones.
+ const groups=[];
+ for(const note of notes){
+  const name=note.group||note.summary||'未分类';
+  if(groups.at(-1)?.name===name)groups.at(-1).items.push(note);
+  else groups.push({name,items:[note]});
+ }
+return `<section class="page knowledge-page"><div class="page-head"><h1>知识库</h1><p>写下实践，也留下一些<br>还没想明白的事。</p></div>${groups.map(group=>`<section class="knowledge-group"><h2>${esc(group.name)}</h2><div class="knowledge-entries">${group.items.map(note=>`<div class="entry"><a href="${publicPath('note',note.id)}">${esc(note.title)}</a>${note.date?`<time datetime="${esc(note.date)}">${esc(note.date.slice(5).replace('-',' / '))}</time>`:''}</div>`).join('')}</div></section>`).join('')}</section>`}
 function noteDetail(id){const n=notes.find(n=>Number(n.id)===Number(id));if(!n)return missing();return `<article class="page reading-page"><a href="${publicPath('knowledge')}" class="back">${arrow()}知识库</a><h1>${esc(n.title)}</h1><div class="byline"><span>Susu</span>${n.date?`<time datetime="${esc(n.date)}">${esc(n.date.replaceAll('-',' / '))}</time>`:''}<span>${esc(n.group||n.summary||'知识库')}</span></div>${SUSU_COVERS.getCover(n)?`<figure class="note-cover">${SUSU_COVERS.render('articles',n)}</figure>`:''}<div class="prose" id="content-body" data-content-kind="articles" data-content-id="${esc(n.id)}"></div><div class="reading-mark" aria-hidden="true"></div><nav class="end-nav"><a href="${publicPath('knowledge')}">${arrow()}返回知识库</a></nav></article>`}
 function renderContentBody(root){
  const body=root.querySelector('#content-body');if(!body)return;
@@ -75,8 +83,7 @@ function renderContentBody(root){
  const item=(project?projects:notes).find(item=>String(item.id)===body.dataset.contentId);if(!item)return;
  if(typeof item.body==='string'){
   if(item.body.trim())renderContentMarkdown(body,item.body);else body.textContent='暂无正文。';
- }else if(project)body.innerHTML=`<p>${esc(item.text||'')}</p>`;
- else body.innerHTML=(item.paras||[]).map(text=>`<p>${esc(text)}</p>`).join('');
+ }else renderContentMarkdown(body,project?item.text||'':(item.paras||[]).join('\n\n'));
 }
 function missing(){return `<section class="page reading-page"><h1>这页暂时不存在</h1><p class="muted" style="margin:24px 0">换个方向，继续看看。</p><a class="text-link" href="${publicPath('home')}">返回首页 ${arrow()}</a></section>`}
 function renderPage(root, name, id) {

@@ -58,7 +58,8 @@ function libraryActions(){
 }
 function libraryRows(){
  const q=libraryQuery.trim().toLocaleLowerCase();
- const matches=libraryItems().map((p,i)=>({p,i})).filter(({p})=>[p.title,p.summary,p.name,p.group,p.alt,p.body].some(v=>v&&v.toLocaleLowerCase().includes(q)));
+ const list=libraryItems();
+ const matches=SUSU_CONTENT.newestFirst(list,tab).map(p=>({p,i:list.indexOf(p)})).filter(({p})=>[p.title,p.summary,p.name,p.group,p.alt,p.body].some(v=>v&&v.toLocaleLowerCase().includes(q)));
  return matches.map(({p,i})=>`<tr><td>${tab==='images'?'<img class="list-thumb" src="'+safe(p.url)+'" alt="">':''}<strong>${safe(p.title||p.name)}</strong></td><td>${safe(p.summary||p.group||'未分类')}</td><td><span class="status ${p.state==='草稿'?'draft':''}">${safe(p.state||'已发布')}</span>${p.state==='草稿'&&publishedItem(tab,p.id)?'<small class="pending-note">线上保留已发布版本</small>':''}</td><td><button class="btn" data-library="edit:${i}" aria-label="编辑 ${safe(p.title||p.name)}">编辑</button></td></tr>`).join('')||'<tr><td colspan="4">没有匹配的内容。</td></tr>';
 }
 function libraryList(){

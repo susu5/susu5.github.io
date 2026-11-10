@@ -91,8 +91,58 @@
     return template;
   }
 
+  // Older visual-editor pastes stored Markdown literally inside HTML paragraphs.
+  // Normalize those text blocks before sanitizing, while retaining real rich text,
+  // images and links. Code and preformatted examples always remain literal.
+  function richHTML(html) {
+    const template = document.createElement('template');
+    template.innerHTML = html;
+    function normalize(parent) {
+      let run = [];
+      function flush() {
+        if (!run.length) return;
+        let fence = '';
+        const lines = run.map(node => {
+          const copy = node.cloneNode(true);
+          if (copy.nodeType === 1) for (const br of copy.querySelectorAll('br')) br.replaceWith('\n');
+          return copy.textContent;
+        });
+        let markdown = '';
+        let previous = '';
+        for (const line of lines) {
+          if (!line.trim() && !fence) continue;
+          const match = line.trimStart().match(/^(`{3,}|~{3,})/);
+          const tableRow = /^\s*\|/.test(line) && /^\s*\|/.test(previous);
+          markdown += (markdown ? fence || tableRow ? '\n' : '\n\n' : '') + line;
+          if (match) fence = fence ? (match[1][0] === fence[0] && match[1].length >= fence.length ? '' : fence) : match[1];
+          previous = line;
+        }
+        const replacement = document.createElement('template');
+        replacement.innerHTML = marked.parse(markdown);
+        run[0].before(replacement.content);
+        run.forEach(node => node.remove());
+        run = [];
+      }
+      for (const node of [...parent.childNodes]) {
+        const textBlock = /^(P|DIV)$/.test(node.nodeName) && [...node.childNodes].every(child => child.nodeType === 3 || child.nodeName === 'BR');
+        const topText = node.nodeType === 3 && parent === template.content;
+        if (textBlock || topText) { run.push(node); continue; }
+        if (node.nodeType === 3 && !node.textContent.trim() && run.length) { run.push(node); continue; }
+        flush();
+        if (node.nodeType === 3) {
+          const inline = document.createElement('template');
+          inline.innerHTML = marked.parseInline(node.textContent.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'));
+          node.replaceWith(inline.content);
+        } else if (node.nodeType === 1 && !discard.has(node.tagName) && !['PRE', 'CODE', 'A'].includes(node.tagName)) normalize(node);
+      }
+      flush();
+    }
+    normalize(template.content);
+    return template.innerHTML;
+  }
+
   function bodyHTML(source) {
-    return source.startsWith(richMarker) ? source.slice(richMarker.length) : marked.parse(source);
+    return source.startsWith(richMarker) ? richHTML(source.slice(richMarker.length)) : marked.parse(source);
   }
 
   window.SUSU_BODY = { assetPath, bodyHTML, cleanHTML, richMarker, safeUrl };

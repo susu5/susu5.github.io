@@ -95,7 +95,7 @@ function mountBodyEditor(root, item) {
 
   function syncSource() {
     if (frame.hidden || !richChanged) return;
-    const clean = cleanHTML(editor.innerHTML, { saving: true, media: files() });
+    const clean = cleanHTML(bodyHTML(richMarker + editor.innerHTML), { saving: true, media: files() });
     source.value = clean.content.textContent.trim() || clean.content.querySelector('img, hr, table') ?
       richMarker + clean.innerHTML : '';
   }
@@ -218,14 +218,14 @@ function mountBodyEditor(root, item) {
     const plain = event.clipboardData.getData('text/plain');
     const images = Array.from(event.clipboardData.files).filter(file => file.type.startsWith('image/'));
     if (html) {
-      const clean = cleanHTML(html, { preview: true, editing: true, media: files() });
+      const clean = cleanHTML(bodyHTML(richMarker + html), { preview: true, editing: true, media: files() });
       if (clean.content.textContent.trim() || clean.content.querySelector('img,table')) {
         command('insertHTML', clean.innerHTML);
         return;
       }
     }
     if (images.length) void insertImages(images);
-    else if (plain) command('insertText', plain);
+    else if (plain) command('insertHTML', cleanHTML(bodyHTML(plain), { preview: true, editing: true, media: files() }).innerHTML);
   });
   editor.addEventListener('dragover', event => event.preventDefault());
   editor.addEventListener('drop', event => {

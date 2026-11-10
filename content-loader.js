@@ -14,7 +14,7 @@
     if (!['projects','notes','arts'].every(key => Array.isArray(content[key]))) throw new Error('Invalid content');
     window.SITE_DATA = content;
     const script = document.createElement('script');
-    script.src = '/site.js?v=20261105-static';
+    script.src = '/site.js?v=20261110-content-fix';
     script.onload = () => SUSU_SITE.mountSite();
     script.onerror = showError;
     document.body.appendChild(script);

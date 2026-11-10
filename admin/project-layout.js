@@ -3,7 +3,7 @@ let nextId=Math.max(...records.projects.map(p=>Number(p.id)))+1;
 let projectRelatedIds=new Set(),projectRelatedQuery='';
 
 const normalizeProjectRelatedIds=ids=>[...new Set((Array.isArray(ids)?ids:[]).map(Number).filter(id=>Number.isSafeInteger(id)&&id>0))];
-const projectArticleOptions=()=>[...(serverState?.published?.articles||[])].filter(article=>Number.isSafeInteger(article.id)&&article.id>0&&article.state!=='草稿').sort((a,b)=>b.id-a.id);
+const projectArticleOptions=()=>SUSU_CONTENT.latest(serverState?.published?.articles,'articles').filter(article=>Number.isSafeInteger(article.id)&&article.id>0);
 function selectedProjectArticleIds(){
  const available=new Set(projectArticleOptions().map(article=>article.id));
  return [...projectRelatedIds].filter(id=>available.has(id));
@@ -42,7 +42,7 @@ function projectRelatedPreview(ids){
 const category=p=>p.publication==='draft'?'draft':p.state==='已完成'?'done':'doing';
 const projectBadge=p=>`<span class="status ${category(p)}">${category(p)==='draft'?(publishedItem('projects',p.id)?'草稿 · 线上有旧版':'草稿'):safe(p.state)}</span>`;
 function projectList(){
- const items=records.projects.map((p,i)=>({p,i})).sort((a,b)=>Number(a.p.id)-Number(b.p.id));
+ const items=SUSU_CONTENT.newestFirst(records.projects,'projects').map(p=>({p,i:records.projects.indexOf(p)}));
  const filters=[['all','全部'],['draft','草稿'],['doing','已发布 · 进行中'],['done','已发布 · 已完成']];
  return `<section class="panel"><div class="filters">${filters.map(([key,name])=>`<button class="btn" data-project="filter:${key}" aria-pressed="${filter===key}">${name} ${items.filter(({p})=>key==='all'||category(p)===key).length}</button>`).join('')}</div><div class="table-scroll"><table><thead><tr><th>编号</th><th>项目</th><th>状态</th><th>平台</th><th>操作</th></tr></thead><tbody>${items.filter(({p})=>filter==='all'||category(p)===filter).map(({p,i})=>`<tr><td class="number">${String(p.id).padStart(3,'0')}</td><td><strong>${safe(p.title)}</strong></td><td>${projectBadge(p)}</td><td>${safe(p.links.map(l=>l.platform).join('、')||'—')}</td><td><button class="btn" data-project="edit:${i}" aria-label="编辑 ${safe(p.title)}">编辑</button></td></tr>`).join('')||'<tr><td colspan="5">此状态暂无项目。</td></tr>'}</tbody></table></div></section>`;
 }

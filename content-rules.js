@@ -3,8 +3,8 @@
   const idOf = item => String(item.key ?? item.id ?? '');
   const isPublished = item => item.publication !== 'draft' && item.state !== '草稿' && item.status !== '草稿';
   const timeOf = (item, kind) => {
-    const dates = kind === 'images' ? [item.uploadedAt, item.createdAt]
-      : kind === 'projects' ? [item.createdAt]
+    const dates = kind === 'images' ? [item.uploadedAt, item.createdAt, item.publishedAt]
+      : kind === 'projects' ? [item.createdAt, item.publishedAt]
       : [item.publishedAt, item.date, item.createdAt];
     for (const value of dates) {
       const time = typeof value === 'number' ? value : Date.parse(value);
@@ -12,12 +12,13 @@
     }
     return 0;
   };
-  // Legacy content has no upload timestamps. Its original sequence is retained as a fallback.
-  const latest = (items, kind) => (items || []).map((item, index) => ({ item, index }))
-    .filter(({ item }) => isPublished(item))
+  // Shared by every list. Updates do not change the original creation/publication order.
+  // Legacy records fall back to their numeric IDs, then their insertion sequence.
+  const newestFirst = (items, kind) => (items || []).map((item, index) => ({ item, index }))
     .sort((a, b) => timeOf(b.item, kind) - timeOf(a.item, kind) ||
       (Number(b.item.id) || 0) - (Number(a.item.id) || 0) || b.index - a.index)
     .map(({ item }) => item);
+  const latest = (items, kind) => newestFirst(items, kind).filter(isPublished);
   const isLandscape = item => Number(item.width) > 0 && Number(item.height) > 0 && Number(item.width) > Number(item.height);
   function resolveHome(collections, config = {}) {
     const groups = {
@@ -47,5 +48,5 @@
     }
     return { hero, featured, heroMode, featuredMode };
   }
-  root.SUSU_CONTENT = { idOf, isPublished, timeOf, latest, isLandscape, resolveHome };
+  root.SUSU_CONTENT = { idOf, isPublished, timeOf, newestFirst, latest, isLandscape, resolveHome };
 })(globalThis);

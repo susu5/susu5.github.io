@@ -24,7 +24,7 @@ jobs:
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Check JavaScript, public content and image references
         run: |
-          node --test scripts/validate-site.test.mjs scripts/admin-api.test.cjs scripts/admin-backup.test.cjs scripts/public-pages.test.mjs
+          node --test scripts/validate-site.test.mjs scripts/admin-api.test.cjs scripts/admin-backup.test.cjs scripts/public-pages.test.mjs scripts/content-regression.test.mjs
           node scripts/validate-site.mjs
       - name: Package public website
         run: node scripts/package-site.mjs
